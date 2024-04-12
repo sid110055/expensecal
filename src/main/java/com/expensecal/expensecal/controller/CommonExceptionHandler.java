@@ -1,6 +1,6 @@
 package com.expensecal.expensecal.controller;
 
-import com.expensecal.expensecal.dto.ValidationExceptionDetails;
+import com.expensecal.expensecal.dto.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class CommonExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<ValidationExceptionDetails>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        List<ValidationExceptionDetails> validationErrors = new ArrayList<>();
+    public ResponseEntity<List<ErrorResponse>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        List<ErrorResponse> validationErrors = new ArrayList<>();
         ex.getBindingResult().getFieldErrors().forEach(error -> {
-            ValidationExceptionDetails validationError = new ValidationExceptionDetails(
+            ErrorResponse validationError = new ErrorResponse(
                     error.getField(),
                     error.getDefaultMessage(),
                     error.getRejectedValue()

@@ -1,3 +1,7 @@
 .idea
 .gradle
 .build
+.checksums
+.excutionHistory
+.fileHashes
+.buildOutputCleanUp
